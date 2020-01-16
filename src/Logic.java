@@ -1,12 +1,20 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class Logic {
 
 	Point start, end;
+	boolean mazeMode;
 
 	public Logic() {
-		new Resources();
+		try {
+			Resources.load();
+		} catch (IOException e) {
+			System.out.println("RESOURCES DIDN'T LOAD CORRECTLY");
+			e.printStackTrace();
+		}
+		mazeMode = true;
 		start = new Point(0, 0);
 		end = new Point(0, 0);
 	}
@@ -14,6 +22,9 @@ public class Logic {
 	public void update() {
 		if (Input.keyUpOnce(KeyEvent.VK_ESCAPE)) {
 			System.exit(0);
+		}
+		if (Input.keyDownOnce(KeyEvent.VK_M)) {
+			mazeMode = !mazeMode;
 		}
 
 		if (Input.mouseDown(0)) {
@@ -41,6 +52,10 @@ public class Logic {
 		// Mouse circle
 		g.setColor(Color.RED);
 		g.fillOval(Input.mx - SIZE / 2, Input.my - SIZE / 2, SIZE, SIZE);
+
+		g.setFont(Resources.font1);
+		g.setColor(mazeMode?Color.RED:Color.GREEN);
+		g.drawString("Mode: " + (mazeMode?"Maze Draw":"Point Placing"), 5, 25);
 	}
 
 	public void drawCentered(Graphics g, Image img, int x, int y) {
