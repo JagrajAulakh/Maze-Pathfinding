@@ -1,12 +1,10 @@
 package com.ui;
 
 import com.Input;
-import com.Resources;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 
 public class TickButton extends UIElement {
 

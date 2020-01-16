@@ -2,6 +2,7 @@ package com;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Grid {
 	public static final int TILE_SIZE = 8;
@@ -39,6 +40,51 @@ public class Grid {
 	public void setLines(boolean v) {
 		showLines = v;
 	}
+
+/*
+	public ArrayList<Tile> A_Star(Tile start, Tile end) {
+
+		ArrayList<Tile> open = new ArrayList<>();
+		ArrayList<Tile> closed = new ArrayList<>();
+		ArrayList<Tile> path = new ArrayList<>();
+		ArrayList<Tile> neighbours = new ArrayList<>();
+		Tile current = start;
+		open.add(start);
+
+		while (true) {
+
+			for (int i = 0; i < open.size(); i++) {
+				if (current.fCost > open.get(i).fCost) {
+					current = open.get(i);
+				}
+			}
+
+			neighbours.add(grid[current.getX()+1][current.getY()]); // Right Node
+			neighbours.add(grid[current.getX()-1][current.getY()]); // Left Node
+			neighbours.add(grid[current.getX()][current.getY()+1]); // Top Node
+			neighbours.add(grid[current.getX()][current.getY()-1]); // Bottom Node
+
+			open.remove(current);
+			closed.add(current);
+
+			if (current  == end) {
+				break;
+			}
+
+			for (int i = 0; i < neighbours.size(); i++) {
+				if (neighbours.get(i).isObstacle() || closed.contains(neighbours.get(i))) {
+					i++;
+				}
+				else if (!open.contains(neighbours.get(i))) { // INCOMPLETE
+
+				}
+			}
+
+		}
+
+	}
+
+ */
 
 	public Tile tileFromMouse(int mx, int my) {
 		int ix = -(x - mx) / TILE_SIZE;
@@ -96,7 +142,7 @@ public class Grid {
 		final int SIZE = 10;
 		g.setColor(new Color(255, 0, 0, 170));
 		if (start != null && end != null) {
-			Resources.drawArrow(g, start.getX(), start.getY(), end.getX(), end.getY(), 20);
+			//Resources.drawArrow(g, start.getX(), start.getY(), end.getX(), end.getY(), 20);
 		}
 		g.setColor(new Color(190, 150, 50));
 		if (start != null) {

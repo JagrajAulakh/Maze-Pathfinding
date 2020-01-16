@@ -40,7 +40,7 @@ public class Panel {
 
 		g.setFont(Resources.font24);
 		g.setColor(Color.GREEN);
-		g.drawString("Control Panel",x+2,y+15);
+		g.drawString("Control Panel",x+2,y+18);
 
 		for (UIElement e:elements) {
 			e.render(g);

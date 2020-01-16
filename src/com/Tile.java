@@ -7,6 +7,8 @@ public class Tile {
 
 	private int x, y;
 
+	public int fCost,gCost,hCost;
+
 	public Tile(int x, int y) { this(x, y, false); }
 	public Tile(int x, int y, boolean wall) {
 		this.x = x;
@@ -32,4 +34,8 @@ public class Tile {
 	public int getY() {
 		return y;
 	}
+
+	public void setfCost(int start, int end) {
+	}
+
 }
