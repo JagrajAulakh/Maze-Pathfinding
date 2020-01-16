@@ -5,6 +5,7 @@ import java.io.IOException;
 public class Logic {
 
 	private Grid grid;
+	private Panel panel;
 
 	public Logic() {
 		try {
@@ -14,14 +15,15 @@ public class Logic {
 			e.printStackTrace();
 		}
 		grid = new Grid(0, 0);
+		panel = new Panel(600,0,200,600);
 	}
 
 	public void update() {
 		if (Input.keyUpOnce(KeyEvent.VK_ESCAPE)) {
 			System.exit(0);
 		}
-
 		grid.update();
+		panel.update();
 	}
 
 	public void render(Graphics g) {
@@ -29,7 +31,7 @@ public class Logic {
 		g.fillRect(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
 
 		grid.render(g);
-
+		panel.render(g);
 	}
 }
 
