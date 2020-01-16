@@ -7,12 +7,12 @@ import java.awt.font.*;
 
 public class Resources {
 
-    public static BufferedImage img1;
+    public static BufferedImage sark;
 
     // Loads Resources
     public Resources() {
         try {
-            img1 = ImageIO.read(new File("sark.jpg"));
+            sark = ImageIO.read(new File("sark.jpg"));
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -16,7 +16,17 @@ public class Logic {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
 
-		g.drawImage(Resources.img1, 0, 0, null);
+		int mx = Input.mx;
+		int my = Input.my;
+
+		drawCentered(g, Resources.sark, mx, my);
 
 	}
+
+	public void drawCentered(Graphics g, Image img, int x, int y) {
+		int cx = x - img.getWidth(null)/2;
+		int cy = y - img.getHeight(null)/2;
+		g.drawImage(img, cx, cy, null);
+	}
 }
+
