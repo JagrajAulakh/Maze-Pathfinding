@@ -1,5 +1,14 @@
 import java.awt.event.*;
 
+/*
+Mouse button legend:
+0 - Left mouse button
+1 - Middle mouse button
+2 - Right mouse button
+3 - Mouse wheel up
+4 - Mouse wheel down
+* */
+
 public class Input implements KeyListener,MouseListener,MouseMotionListener,MouseWheelListener {
 
     private enum KeyState {
