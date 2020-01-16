@@ -28,13 +28,13 @@ public class Logic {
 
 	public void render(Graphics g) {
 		int SIZE = 10;
-		g.setColor(Color.BLACK);
+		g.setColor(new Color(15, 15, 15));
 		g.fillRect(0, 0, GameLoop.WIDTH, GameLoop.HEIGHT);
 
 		// start/end circles
-		g.setColor(Color.BLUE);
+		g.setColor(new Color(0, 0, 255, 170));
 		drawArrow(g, start, end, 20);
-		g.setColor(new Color(180, 30, 30));
+		g.setColor(new Color(190, 150, 50));
 		g.fillOval((int) start.getX() - SIZE / 2, (int) start.getY() - SIZE / 2, SIZE, SIZE);
 		g.fillOval((int) end.getX() - SIZE / 2, (int) end.getY() - SIZE / 2, SIZE, SIZE);
 
