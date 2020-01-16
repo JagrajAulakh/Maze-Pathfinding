@@ -60,10 +60,12 @@ public class Grid {
 			}
 		} else {
 			if (Input.mouseDown(0)) {
-				start = tileFromMouse(Input.mx, Input.my);
+				Tile newStart = tileFromMouse(Input.mx, Input.my);
+				start = newStart == null ? start : newStart;
 			}
 			if (Input.mouseDown(2)) {
-				end = tileFromMouse(Input.mx, Input.my);
+				Tile newEnd = tileFromMouse(Input.mx, Input.my);
+				end = newEnd == null ? end : newEnd;
 			}
 		}
 	}
@@ -80,7 +82,7 @@ public class Grid {
 			g.drawLine(x, y + i * TILE_SIZE, x + twidth * TILE_SIZE, y + i * TILE_SIZE);
 		}
 
-		g.setFont(Resources.font1);
+		g.setFont(Resources.font16);
 		g.setColor(mazeMode ? Color.RED : Color.GREEN);
 		g.drawString("Mode: " + (mazeMode ? "Maze Draw" : "Point Placing"), 5, 25);
 

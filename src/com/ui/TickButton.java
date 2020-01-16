@@ -1,41 +1,51 @@
 package com.ui;
 
+import com.Input;
+import com.Resources;
+
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class TickButton extends UIElement {
 
-    private ArrayList<String> values;
-    private int index;
-    private boolean TICKED;
+	private String value;
+	private Rectangle2D boxRect, textRect;
+	private int lineHeight;
+	private boolean ticked;
 
-    public TickButton(int x, int y) {
-        super(x,y);
-        values = new ArrayList<>();
-        index = 0;
-        TICKED = false;
-    }
+	public TickButton(int x, int y, String value) {
+		super(x, y);
+		this.value = value;
+		ticked = false;
+		textRect = font.getStringBounds(value, new FontRenderContext(null, false, false));
+		lineHeight = (int)Math.round(textRect.getHeight());
+	}
 
-    public void addValue(String val) {
-        values.add(val);
-    }
+	@Override
+	public void update() {
+		int mx = Input.mx;
+		int my = Input.my;
+		if (Input.mouseUp(0)) {
+			if (x < mx && mx <= x + textRect.getWidth()+20 && y < my && my <= y + textRect.getHeight()) {
+				ticked = !ticked;
+			}
+		}
+	}
 
-    public String currentValue() {
-        return values.get(index);
-    }
+	@Override
+	public void render(Graphics g) {
+		final int BOX_SIZE = 10;
 
-    public int getIndex() {
-        return index;
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void render(Graphics g) {
-
-    }
+		if (ticked) {
+			g.drawLine(x, y + lineHeight / 2 - BOX_SIZE/2, x + BOX_SIZE, y + lineHeight / 2 + BOX_SIZE/2);
+			g.drawLine(x + BOX_SIZE, y + lineHeight / 2 - BOX_SIZE/2, x, y + lineHeight / 2 + BOX_SIZE/2);
+		}
+		g.setColor(Color.WHITE);
+		g.drawRect(x, y + lineHeight / 2 - BOX_SIZE/2, BOX_SIZE, BOX_SIZE);
+		g.setFont(font);
+		g.drawString(value, x + 20, y + lineHeight*3/4);
+	}
 
 }

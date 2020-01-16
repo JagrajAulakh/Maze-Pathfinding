@@ -16,6 +16,12 @@ public class Panel {
 		this.width = width;
 		this.height = height;
 		elements = new LinkedList<UIElement>();
+
+		elements.add(new TickButton(x+20, y+50, "Testing"));
+		RadioButton algs = new RadioButton(x+20, y+100);
+		algs.addValue("A* Path-finding");
+		algs.addValue("D* Path-finding");
+		elements.add(algs);
 	}
 
 	public void update() {
@@ -28,7 +34,7 @@ public class Panel {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect (x, y, width, height);
 
-		g.setFont(Resources.font1);
+		g.setFont(Resources.font24);
 		g.setColor(Color.GREEN);
 		g.drawString("Control Panel",x+2,y+15);
 

@@ -10,7 +10,7 @@ import java.awt.font.*;
 public class Resources {
 
 	public static BufferedImage sark;
-	public static Font font1;
+	public static Font font16, font18, font24;
 
 	// Loads com.Resources
 	public Resources() {
@@ -18,7 +18,9 @@ public class Resources {
 
 	public static void load() throws IOException {
 		sark = ImageIO.read(new File("assets/sark.jpg"));
-		font1 = new Font("Times New Roman", Font.PLAIN, 16);
+		font16 = new Font("Times New Roman", Font.PLAIN, 16);
+		font18 = new Font("Times New Roman", Font.PLAIN, 18);
+		font24 = new Font("Times New Roman", Font.PLAIN, 24);
 	}
 
 
