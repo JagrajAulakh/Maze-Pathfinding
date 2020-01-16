@@ -8,3 +8,12 @@ The program will create a randomly generated maze and find the best path from po
 - Java swing for graphics
 - A* algorithm for path-finding
 - [] for maze generation
+
+### Controls
+There are 2 modes (`m` to switch modes):
+- Point mode
+    - `LMB` places start point
+    - `RMB` places end point
+- maze mode
+    - `LMB` draws walls
+    - `RMB` removes walls
