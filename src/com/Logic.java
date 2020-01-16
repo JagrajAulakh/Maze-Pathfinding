@@ -1,3 +1,7 @@
+package com;
+
+import com.ui.Panel;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -5,7 +9,7 @@ import java.io.IOException;
 public class Logic {
 
 	private Grid grid;
-	private Panel panel;
+	private com.ui.Panel panel;
 
 	public Logic() {
 		try {

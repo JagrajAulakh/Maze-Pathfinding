@@ -1,3 +1,5 @@
+package com;
+
 import javax.swing.*;
 import java.awt.*;
 import javax.imageio.ImageIO;
@@ -10,7 +12,7 @@ public class Resources {
 	public static BufferedImage sark;
 	public static Font font1;
 
-	// Loads Resources
+	// Loads com.Resources
 	public Resources() {
 	}
 
