@@ -18,7 +18,7 @@ public class Tile {
 
 	public void render(Graphics g) {
 		if (obstacle) {
-			g.setColor(Color.WHITE);
+			g.setColor(Color.RED);
 			g.fillRect(x+1, y+1, Grid.TILE_SIZE-2, Grid.TILE_SIZE-2);
 		}
 	}

@@ -15,7 +15,7 @@ public class Resources {
 	}
 
 	public static void load() throws IOException {
-		sark = ImageIO.read(new File("sark.jpg"));
+		sark = ImageIO.read(new File("assets/sark.jpg"));
 		font1 = new Font("Times New Roman", Font.PLAIN, 16);
 	}
 
