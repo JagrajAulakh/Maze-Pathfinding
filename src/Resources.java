@@ -12,7 +12,7 @@ public class Resources {
     // Loads Resources
     public Resources() {
         try {
-            img1 = ImageIO.read(new File(""));
+            img1 = ImageIO.read(new File("sark.jpg"));
         }
         catch (IOException e) {
             e.printStackTrace();
