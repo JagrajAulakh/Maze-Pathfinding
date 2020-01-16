@@ -23,6 +23,8 @@ public class TickButton extends UIElement {
 		lineHeight = (int)Math.round(textRect.getHeight());
 	}
 
+	public boolean value() { return ticked; }
+
 	@Override
 	public void update() {
 		int mx = Input.mx;

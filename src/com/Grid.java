@@ -36,6 +36,10 @@ public class Grid {
 		showLines = !showLines;
 	}
 
+	public void setLines(boolean v) {
+		showLines = v;
+	}
+
 	public Tile tileFromMouse(int mx, int my) {
 		int ix = -(x - mx) / TILE_SIZE;
 		int iy = -(y - my) / TILE_SIZE;
@@ -72,14 +76,16 @@ public class Grid {
 
 	public void render(Graphics g) {
 		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid.length; j++) {
+			for (int j = 0; j < grid[i].length; j++) {
 				grid[i][j].render(g);
 			}
 		}
-		g.setColor(new Color(0, 255, 0, 80));
-		for (int i = 0; i <= twidth; i++) {
-			g.drawLine(x + i * TILE_SIZE, y, x + i * TILE_SIZE, y + twidth * TILE_SIZE);
-			g.drawLine(x, y + i * TILE_SIZE, x + twidth * TILE_SIZE, y + i * TILE_SIZE);
+		if (showLines) {
+			g.setColor(new Color(0, 255, 0, 80));
+			for (int i = 0; i <= twidth; i++) {
+				g.drawLine(x + i * TILE_SIZE, y, x + i * TILE_SIZE, y + twidth * TILE_SIZE);
+				g.drawLine(x, y + i * TILE_SIZE, x + twidth * TILE_SIZE, y + i * TILE_SIZE);
+			}
 		}
 
 		g.setFont(Resources.font16);

@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Logic {
 
 	private Grid grid;
-	private com.ui.Panel panel;
+	private Panel panel;
 
 	public Logic() {
 		try {
@@ -26,8 +26,9 @@ public class Logic {
 		if (Input.keyUpOnce(KeyEvent.VK_ESCAPE)) {
 			System.exit(0);
 		}
-		grid.update();
 		panel.update();
+		grid.setLines(panel.showLines());
+		grid.update();
 	}
 
 	public void render(Graphics g) {

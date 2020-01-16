@@ -9,6 +9,7 @@ public class Panel {
 
 	private int x,y,width, height;
 	private LinkedList<UIElement> elements;
+	private TickButton showLinesButton;
 
 	public Panel(int x, int y, int width, int height) {
 		this.x = x;
@@ -17,12 +18,15 @@ public class Panel {
 		this.height = height;
 		elements = new LinkedList<UIElement>();
 
-		elements.add(new TickButton(x+20, y+50, "Testing"));
-		RadioButton algs = new RadioButton(x+20, y+100);
-		algs.addValue("A* Path-finding");
-		algs.addValue("D* Path-finding");
-		elements.add(algs);
+		showLinesButton = new TickButton(x+20, y+50, "Show Grid Lines");
+		elements.add(showLinesButton);
+		RadioButton algsButton = new RadioButton(x+20, y+100);
+		algsButton.addValue("A* Path-finding");
+		algsButton.addValue("D* Path-finding");
+		elements.add(algsButton);
 	}
+
+	public boolean showLines() { return showLinesButton.value(); }
 
 	public void update() {
 		for (UIElement e:elements) {
