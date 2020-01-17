@@ -5,16 +5,16 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class Grid {
-	public static final int TILE_SIZE = 8;
+	public static final int TILE_SIZE = 10;
 
 	private int twidth, theight;
 	private Tile[][] grid;
 	private boolean showLines;
 	private boolean mazeMode;
 	Tile start, end;
+	private ArrayList<Tile> currentPath;
 
 	private int x, y;
-	private int i;
 
 	public Grid(int x, int y) {
 		this.x = x;
@@ -41,50 +41,70 @@ public class Grid {
 		showLines = v;
 	}
 
-/*
 	public ArrayList<Tile> A_Star(Tile start, Tile end) {
 
-		ArrayList<Tile> open = new ArrayList<>();
-		ArrayList<Tile> closed = new ArrayList<>();
-		ArrayList<Tile> path = new ArrayList<>();
-		ArrayList<Tile> neighbours = new ArrayList<>();
-		Tile current = start;
+		ArrayList<Tile> open = new ArrayList<Tile>();
+		ArrayList<Tile> closed = new ArrayList<Tile>();
 		open.add(start);
 
 		while (true) {
-
-			for (int i = 0; i < open.size(); i++) {
-				if (current.fCost > open.get(i).fCost) {
-					current = open.get(i);
+			Tile current = open.get(0);
+			for (Tile t : open) {
+				if (current.fCost > t.fCost) {
+					current = t;
 				}
 			}
 
-			neighbours.add(grid[current.getX()+1][current.getY()]); // Right Node
-			neighbours.add(grid[current.getX()-1][current.getY()]); // Left Node
-			neighbours.add(grid[current.getX()][current.getY()+1]); // Top Node
-			neighbours.add(grid[current.getX()][current.getY()-1]); // Bottom Node
+			ArrayList<Tile> neighbours = new ArrayList<Tile>();
+			if (current.getXIndex() + 1 < grid[0].length) {
+				neighbours.add(grid[current.getYIndex()][current.getXIndex() + 1])
+				; // Right Node
+			}
+			if (current.getXIndex() - 1 > 0) {
+				neighbours.add(grid[current.getYIndex()][current.getXIndex() - 1]); // Left Node
+			}
+			if (current.getYIndex() + 1 < grid.length) {
+				neighbours.add(grid[current.getYIndex() + 1][current.getXIndex()]); // Top Node
+			}
+			if (current.getYIndex() - 1 > 0) {
+				neighbours.add(grid[current.getYIndex() - 1][current.getXIndex()]); // Bottom Node
+			}
 
 			open.remove(current);
 			closed.add(current);
 
-			if (current  == end) {
+			if (current == end) {
 				break;
 			}
 
-			for (int i = 0; i < neighbours.size(); i++) {
-				if (neighbours.get(i).isObstacle() || closed.contains(neighbours.get(i))) {
-					i++;
+			for (Tile n : neighbours) {
+				if (n.isObstacle() || closed.contains(n)) {
+					continue;
 				}
-				else if (!open.contains(neighbours.get(i))) { // INCOMPLETE
+				int newGCost = n.calculateGCost(current);
+				int newHCost = n.calculateHCost(end);
+				int newFCost = newGCost + newHCost;
 
+				if (n.fCost == -1 || newFCost < n.fCost || !open.contains(n)) {
+					n.setParent(current);
+					n.setFCost(newFCost);
+					if (!open.contains(n)) {
+						open.add(n);
+					}
 				}
 			}
 
 		}
 
+		ArrayList<Tile> path = new ArrayList<Tile>();
+		Tile current = end;
+		while (current.getParent() != null) {
+			path.add(current);
+			current = current.getParent();
+		}
+		path.add(start);
+		return path;
 	}
-
- */
 
 	public Tile tileFromMouse(int mx, int my) {
 		int ix = -(x - mx) / TILE_SIZE;
@@ -99,6 +119,9 @@ public class Grid {
 
 		if (Input.keyDownOnce(KeyEvent.VK_M)) {
 			mazeMode = !mazeMode;
+		}
+		if (Input.keyDownOnce(KeyEvent.VK_ENTER)) {
+			currentPath = A_Star(start, end);
 		}
 
 		if (mazeMode) {
@@ -134,16 +157,15 @@ public class Grid {
 			}
 		}
 
-		g.setFont(Resources.font16);
-		g.setColor(mazeMode ? Color.RED : Color.GREEN);
-		g.drawString("Mode: " + (mazeMode ? "Maze Draw" : "Point Placing"), 5, 25);
+		if (currentPath != null) {
+			g.setColor(Color.GREEN);
+			for (Tile t:currentPath) {
+				g.fillRect(t.getX() + 1, t.getY() + 1, TILE_SIZE-2, TILE_SIZE-2);
+			}
+		}
 
 		// start/end circles
 		final int SIZE = 10;
-		g.setColor(new Color(255, 0, 0, 170));
-		if (start != null && end != null) {
-			//Resources.drawArrow(g, start.getX(), start.getY(), end.getX(), end.getY(), 20);
-		}
 		g.setColor(new Color(190, 150, 50));
 		if (start != null) {
 			g.fillOval((int) start.getX(), (int) start.getY(), SIZE, SIZE);
@@ -154,5 +176,9 @@ public class Grid {
 		// Mouse circle
 		g.setColor(Color.RED);
 		g.fillOval(Input.mx - SIZE / 2, Input.my - SIZE / 2, SIZE, SIZE);
+
+		g.setFont(Resources.font16);
+		g.setColor(mazeMode ? Color.RED : Color.GREEN);
+		g.drawString("Mode: " + (mazeMode ? "Maze Draw" : "Point Placing"), 5, 25);
 	}
 }
