@@ -3,6 +3,7 @@ package com;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Grid {
 	public static final int TILE_SIZE = 10;
@@ -54,6 +55,10 @@ public class Grid {
 		open.add(start);
 
 		while (true) {
+			// No possible path
+			if (open.size() == 0) {
+				return null;
+			}
 			Tile current = open.get(0);
 			for (Tile t : open) {
 				if (current.fCost > t.fCost) {
@@ -121,6 +126,14 @@ public class Grid {
 		return null;
 	}
 
+	public void clearGrid() {
+		for (Tile[] i : grid) {
+			for (Tile t : i) {
+				t.setObstacle(false);
+			}
+		}
+	}
+
 	public void update() {
 
 		if (Input.keyDownOnce(KeyEvent.VK_M)) {
@@ -130,12 +143,7 @@ public class Grid {
 			currentPath = A_Star(start, end);
 		}
 		if (Input.keyDownOnce(KeyEvent.VK_BACK_SPACE)) {
-			for (int i = 0; i < grid.length; i++) {
-				for (int j = 0; j < grid.length; j++) {
-					grid[i][j].setObstacle(false);
-
-				}
-			}
+			clearGrid();
 		}
 
 		if (mazeMode) {
@@ -158,11 +166,6 @@ public class Grid {
 	}
 
 	public void render(Graphics g) {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				grid[i][j].render(g);
-			}
-		}
 		if (showLines) {
 			g.setColor(new Color(0, 255, 0, 80));
 			for (int i = 0; i <= twidth; i++) {
@@ -175,6 +178,12 @@ public class Grid {
 			g.setColor(Color.GREEN);
 			for (Tile t:currentPath) {
 				g.fillRect(t.getX() + 1, t.getY() + 1, TILE_SIZE-2, TILE_SIZE-2);
+			}
+		}
+
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				grid[i][j].render(g);
 			}
 		}
 
