@@ -6,7 +6,6 @@ public class Tile {
 	public static final int OPEN = 1;
 	public static final int CLOSED = 2;
 
-
 	private boolean obstacle;
 
 	private int x, y;

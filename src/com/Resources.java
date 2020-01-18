@@ -23,10 +23,6 @@ public class Resources {
 		font24 = new Font("Times New Roman", Font.PLAIN, 24);
 	}
 
-
-
-
-
 	// Drawing helper methods
 	public static void drawCentered(Graphics g, Image img, int x, int y) {
 		int cx = x - img.getWidth(null) / 2;

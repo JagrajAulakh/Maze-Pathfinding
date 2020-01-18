@@ -9,14 +9,14 @@ import java.awt.geom.Rectangle2D;
 public class TickButton extends UIElement {
 
 	private String value;
-	private Rectangle2D boxRect, textRect;
+	private Rectangle2D textRect;
 	private int lineHeight;
 	private boolean ticked;
 
 	public TickButton(int x, int y, String value) {
 		super(x, y);
 		this.value = value;
-		ticked = false;
+		ticked = true;
 		textRect = font.getStringBounds(value, new FontRenderContext(null, false, false));
 		lineHeight = (int)Math.round(textRect.getHeight());
 	}

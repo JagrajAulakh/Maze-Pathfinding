@@ -10,8 +10,9 @@ public class Grid {
 	private int twidth, theight;
 	private Tile[][] grid;
 	private boolean showLines;
+	private boolean calculate;
 	private boolean mazeMode;
-	Tile start, end;
+	private Tile start, end;
 	private ArrayList<Tile> currentPath;
 
 	private int x, y;
@@ -20,6 +21,7 @@ public class Grid {
 		this.x = x;
 		this.y = y;
 		showLines = true;
+		calculate = false;
 		twidth = 600 / TILE_SIZE;
 		theight = 600 / TILE_SIZE;
 
@@ -39,6 +41,10 @@ public class Grid {
 
 	public void setLines(boolean v) {
 		showLines = v;
+	}
+
+	public void setCalculate(boolean v) {
+		calculate = v;
 	}
 
 	public ArrayList<Tile> A_Star(Tile start, Tile end) {
@@ -120,8 +126,16 @@ public class Grid {
 		if (Input.keyDownOnce(KeyEvent.VK_M)) {
 			mazeMode = !mazeMode;
 		}
-		if (Input.keyDownOnce(KeyEvent.VK_ENTER)) {
+		if (Input.keyDownOnce(KeyEvent.VK_ENTER) || calculate) {
 			currentPath = A_Star(start, end);
+		}
+		if (Input.keyDownOnce(KeyEvent.VK_BACK_SPACE)) {
+			for (int i = 0; i < grid.length; i++) {
+				for (int j = 0; j < grid.length; j++) {
+					grid[i][j].setObstacle(false);
+
+				}
+			}
 		}
 
 		if (mazeMode) {
@@ -178,7 +192,7 @@ public class Grid {
 		g.fillOval(Input.mx - SIZE / 2, Input.my - SIZE / 2, SIZE, SIZE);
 
 		g.setFont(Resources.font16);
-		g.setColor(mazeMode ? Color.RED : Color.GREEN);
+		g.setColor(mazeMode ? Color.YELLOW : Color.WHITE);
 		g.drawString("Mode: " + (mazeMode ? "Maze Draw" : "Point Placing"), 5, 25);
 	}
 }
