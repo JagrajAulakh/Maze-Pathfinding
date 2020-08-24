@@ -17,3 +17,6 @@ There are 2 modes (`m` to switch modes):
 - Maze mode
     - `LMB` draws walls
     - `RMB` removes walls
+
+### Demo
+<img src="demo.gif" width="600">
